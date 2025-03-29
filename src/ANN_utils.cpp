@@ -4,6 +4,6 @@ namespace ANN_utils
 {
     float sigmoidTransferFunction(float x)
     {
-        return 1/(1+exp(-x));
+        return 1 / (1+exp(-x));
     }
 }
