@@ -3,6 +3,8 @@
 
 #include <vector>
 
+#include "ANN_utils.h"
+
 class Neuron {
 private:
     float _bias, _output;
@@ -10,8 +12,10 @@ private:
     std::vector<Neuron> _inputs;
 
 public:
-    float getScore();
-    float setBias(float b);
+    Neuron();
+
+    float getOutput();
+    bool setBias(float b);
     bool addInput(Neuron input);
 };
 

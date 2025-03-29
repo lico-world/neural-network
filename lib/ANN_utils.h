@@ -5,7 +5,7 @@
 
 namespace ANN_utils {
     float sigmoidTransferFunction(float x);
-};
+}
 
 
 #endif //NEURAL_NETWORK_ANN_UTILS_H
