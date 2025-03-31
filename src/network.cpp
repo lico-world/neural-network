@@ -11,7 +11,7 @@ Network::Network(int nbInputs, int nbOutputs, int nbHiddenLayers, std::vector<in
     this->_outputLayer = std::vector<Neuron>(this->_nbOutputs);
 
     // Connects every layer to past outputs
-    for (int i = 0; i < this->_hiddenLayers.size() - 1; ++i)
+    for (unsigned int i = 0; i < this->_hiddenLayers.size() - 1; ++i)
         for (auto& n : this->_hiddenLayers[i])
             for (auto& n_1 : this->_hiddenLayers[i + 1])
                 n_1.addInput(n);
@@ -21,12 +21,12 @@ Network::Network(int nbInputs, int nbOutputs, int nbHiddenLayers, std::vector<in
             n.addInput(n__1);
 }
 
-std::vector<float> Neuron::run(std::vector<float> data)
+std::vector<float> Network::run(std::vector<float> data)
 {
     return {};
 }
 
-bool Neuron::backpropagation()
+bool Network::backpropagation()
 {
     return true;
 }
