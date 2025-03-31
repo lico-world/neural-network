@@ -7,7 +7,7 @@
 
 class Neuron {
 private:
-    float _bias, _output;
+    float _bias, _gradient, _output;
     std::vector<float> _weights;
     std::vector<Neuron> _inputs;
 
@@ -15,9 +15,11 @@ public:
     Neuron();
 
     float getOutput();
+    bool computeOutput();
     bool setBias(float b);
     bool addInput(Neuron input);
-    bool setWeights(std::vector<float> newWeights);
+    bool updateWeights();
+    bool setGradient(float gradient);
 };
 
 

@@ -19,18 +19,30 @@ bool Neuron::addInput(Neuron input)
     return true;
 }
 
-bool Neuron::setWeights(std::vector<float> newWeights)
+bool Neuron::updateWeights()
 {
-    this->_weights = newWeights;
+    return true;
+}
+
+bool Neuron::setGradient(float gradient)
+{
+    this->_gradient = gradient;
+    return true;
+}
+
+bool Neuron::computeOutput()
+{
+    float out = this->_bias;
+
+    for(unsigned int i=0 ; i<std::min(this->_weights.size(), this->_inputs.size()) ; i++)
+        out += this->_weights[i] * this->_inputs[i].getOutput();
+
+    this->_output = ANN_utils::sigmoidTransferFunction(out);
+
     return true;
 }
 
 float Neuron::getOutput()
 {
-    float output = this->_bias;
-
-    for(unsigned int i=0 ; i<std::min(this->_weights.size(), this->_inputs.size()) ; i++)
-        output += this->_weights[i] * this->_inputs[i].getOutput();
-
-    return ANN_utils::sigmoidTransferFunction(output);
+    return this->_output;
 }
