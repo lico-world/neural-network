@@ -11,7 +11,7 @@
 
 class Neuron {
 private:
-    float _bias, _gradient, _output;
+    float _bias, _unitError, _output;
     std::vector<float> _weights;
     std::vector<Neuron*> _inputs;
 
@@ -24,7 +24,7 @@ public:
     bool setOutput(float b); // For input neurons only
     bool addInput(Neuron* input);
     bool updateWeights();
-    bool setGradient(float gradient);
+    bool setUnitError(float unitError);
 
     friend std::ostream& operator<<(std::ostream& os, const Neuron& n)
     {

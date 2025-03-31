@@ -15,7 +15,7 @@ public:
     Network(int nbInputs, int nbOutputs, int nbHiddenLayers, std::vector<int> hiddenLayersSizes);
 
     std::vector<float> run(std::vector<float> data);
-    bool backpropagation();
+    bool backpropagation(std::vector<float> result, std::vector<float> wanted);
 
     friend std::ostream& operator<<(std::ostream& os, const Network& n)
     {

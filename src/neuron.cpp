@@ -31,12 +31,18 @@ bool Neuron::addInput(Neuron* input)
 
 bool Neuron::updateWeights()
 {
+    for(int i=0 ; i<this->_inputs.size() ; i++)
+    {
+        this->_inputs[i]->setUnitError(this->_weights[i] * this->_unitError);
+        this->_weights[i] += this->_unitError * this->_inputs[i]->getOutput();
+    }
+
     return true;
 }
 
-bool Neuron::setGradient(float gradient)
+bool Neuron::setUnitError(float unitError)
 {
-    this->_gradient = gradient;
+    this->_unitError = unitError;
     return true;
 }
 

@@ -72,7 +72,23 @@ std::vector<float> Network::run(std::vector<float> data)
     return result;
 }
 
-bool Network::backpropagation()
+bool Network::backpropagation(std::vector<float> result, std::vector<float> wanted)
 {
+    if(result.size() != wanted.size())
+    {
+        std::cout << "The labeled data should have as many possibilities as the network result." << std::endl;
+        return false;
+    }
+
+    for(int i=0 ; i<this->_outputLayer.size() ; i++)
+    {
+        this->_outputLayer[i]->setUnitError(result[i] * (1 - result[i]) * (wanted[i] - result[i]));
+        this->_outputLayer[i]->updateWeights();
+    }
+
+    for(auto& l : this->_hiddenLayers)
+        for(auto& n : l)
+            n->updateWeights();
+
     return true;
 }
