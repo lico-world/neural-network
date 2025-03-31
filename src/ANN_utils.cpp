@@ -6,4 +6,9 @@ namespace ANN_utils
     {
         return 1 / (1+exp(-x));
     }
+
+    float derivativeSigmoidTransferFunction(float x)
+    {
+        return exp(-x) / ( pow((exp(-x)+1), 2) );
+    }
 }

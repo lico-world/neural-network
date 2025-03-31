@@ -14,12 +14,14 @@ include_directories(lib)
 set(SOURCES
         src/neuron.cpp
         src/ANN_utils.cpp
+        src/network.cpp
         main.cpp
 )
 
 set(HEADERS
         lib/neuron.h
         lib/ANN_utils.h
+        lib/network.h
 )
 
 # Création de l'exécutable
