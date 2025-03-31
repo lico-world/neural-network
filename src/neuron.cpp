@@ -15,6 +15,13 @@ bool Neuron::setBias(float b)
 bool Neuron::addInput(Neuron input)
 {
     this->_inputs.push_back(input);
+    this->_weights.push_back(1);
+    return true;
+}
+
+bool Neuron::setWeights(std::vector<float> newWeights)
+{
+    this->_weights = newWeights;
     return true;
 }
 

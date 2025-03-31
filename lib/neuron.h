@@ -17,6 +17,7 @@ public:
     float getOutput();
     bool setBias(float b);
     bool addInput(Neuron input);
+    bool setWeights(std::vector<float> newWeights);
 };
 
 
