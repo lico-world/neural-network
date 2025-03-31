@@ -23,7 +23,27 @@ Network::Network(int nbInputs, int nbOutputs, int nbHiddenLayers, std::vector<in
 
 std::vector<float> Network::run(std::vector<float> data)
 {
-    return {};
+    if(data.size() != this->_nbInputs)
+    {
+        std::cout << "Data size must me adapted to the inputs dimensions of the network: " << this->_nbInputs << std::endl;
+        return {};
+    }
+
+    auto result = std::vector<float>(0);
+
+    // Assign data to inputs
+    for(unsigned int i=0 ; i<this->_nbInputs ; i++)
+        this->_inputLayer[i].setBias(data[i]);
+
+    // Compute layers one by one
+    for(auto& layer : this->_hiddenLayers)
+        for(auto& neuron : layer)
+            neuron.computeOutput();
+
+    for(auto& output : this->_outputLayer)
+        result.push_back(output.computeOutput());
+
+    return result;
 }
 
 bool Network::backpropagation()

@@ -1,11 +1,13 @@
 #ifndef NEURAL_NETWORK_NETWORK_H
 #define NEURAL_NETWORK_NETWORK_H
 
+#include <iostream>
+
 #include "neuron.h"
 
 class Network {
 private:
-    int _nbHiddenLayers, _nbInputs, _nbOutputs;
+    unsigned int _nbHiddenLayers, _nbInputs, _nbOutputs;
     std::vector<std::vector<Neuron>> _hiddenLayers;
     std::vector<Neuron> _inputLayer, _outputLayer;
 
