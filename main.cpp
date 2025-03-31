@@ -23,13 +23,20 @@ int main(int argc, char ** argv)
     for(int r=0 ; r<result.size() ; r++)
         std::cout << std::fixed << std::setprecision(3) << "Result class -" << r << "-: " << result[r] << std::endl;
 
-    N.backpropagation(result, wanted);
+    for(int i=0 ; i<100 ; i++)
+    {
+        N.backpropagation(result, wanted);
+        std::cout << std::endl;
+
+        result = N.run(data);
+
+        for (int r = 0; r < result.size(); r++)
+            std::cout << "Result class -" << r << "-: " << result[r] << std::endl;
+    }
+
     std::cout << std::endl;
-
-    result = N.run(data);
-
-    for(int r=0 ; r<result.size() ; r++)
-        std::cout << std::fixed << std::setprecision(3) << "Result class -" << r << "-: " << result[r] << std::endl;
+    for (int w = 0; w < wanted.size(); w++)
+        std::cout << "Error -" << w << "-: " << pow(wanted[w] - result[w], 2) << std::endl;
 
     auto end = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double, std::milli> duration = end - start;
