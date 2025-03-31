@@ -3,10 +3,15 @@
 
 #include <vector>
 #include <cmath>
+#include <random>
+#include <chrono>
 
 namespace ANN_utils {
     float sigmoidTransferFunction(float x);
     float derivativeSigmoidTransferFunction(float x);
+
+    float randomUniformValue(float min, float max);
+    float randomNormalValue(float mean, float dev);
 }
 
 
