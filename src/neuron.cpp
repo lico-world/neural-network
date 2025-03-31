@@ -1,9 +1,10 @@
 #include "../lib/neuron.h"
 
-Neuron::Neuron() : _bias(1)
+Neuron::Neuron()
 {
+    this->_bias = ANN_utils::randomNormalValue(0.0f, 1.0f);
     this->_weights = std::vector<float>();
-    this->_inputs = std::vector<Neuron>();
+    this->_inputs = std::vector<Neuron*>();
 }
 
 bool Neuron::setBias(float b)
@@ -12,25 +13,52 @@ bool Neuron::setBias(float b)
     return true;
 }
 
-bool Neuron::addInput(Neuron input)
+bool Neuron::setOutput(float o)
 {
-    this->_inputs.push_back(input);
-    this->_weights.push_back(1);
+    this->_output = o;
     return true;
 }
 
-bool Neuron::setWeights(std::vector<float> newWeights)
+bool Neuron::addInput(Neuron* input)
 {
-    this->_weights = newWeights;
+    if(input == nullptr)
+        return false;
+
+    this->_inputs.push_back(input);
+    this->_weights.push_back(ANN_utils::randomNormalValue(0.0f, 1.0f));
+    return true;
+}
+
+bool Neuron::updateWeights()
+{
+    for(int i=0 ; i<this->_inputs.size() ; i++)
+    {
+        this->_inputs[i]->setUnitError(this->_weights[i] * this->_unitError);
+        this->_weights[i] += this->_unitError * this->_inputs[i]->getOutput();
+    }
+
+    return true;
+}
+
+bool Neuron::setUnitError(float unitError)
+{
+    this->_unitError = unitError;
+    return true;
+}
+
+bool Neuron::computeOutput()
+{
+    float out = this->_bias;
+
+    for(unsigned int i=0 ; i<std::min(this->_weights.size(), this->_inputs.size()) ; i++)
+        out += this->_weights[i] * this->_inputs[i]->getOutput();
+
+    this->_output = ANN_utils::sigmoidTransferFunction(out);
+
     return true;
 }
 
 float Neuron::getOutput()
 {
-    float output = this->_bias;
-
-    for(unsigned int i=0 ; i<std::min(this->_weights.size(), this->_inputs.size()) ; i++)
-        output += this->_weights[i] * this->_inputs[i].getOutput();
-
-    return ANN_utils::sigmoidTransferFunction(output);
+    return this->_output;
 }
